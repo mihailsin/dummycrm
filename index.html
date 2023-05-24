@@ -12,59 +12,25 @@
 
         <script type="text/javascript">
             window.onload = function () {
-                // var crmBaseUrl = "https://duckycrm-7409-dev.twil.io";
-
-                // get references to the phone number and dial button elements
-                var btnDial = document.getElementById("dial-number");
-                var txtNumber = document.getElementById("phone-number");
+                const dial = document.getElementById("dial-number");
 
                 // get the window object of the Flex iframe
-                var flexRef = document.getElementById("flex").contentWindow;
-
+                const flexRef = document.getElementById("flex").contentWindow;
                 // use postMessage to send the phone number to the Flex iframe
                 function sendMessage(event) {
                     event.preventDefault();
-                    console.log("!!!!");
-                    console.log(event);
-                    flexRef.postMessage(txtNumber.value);
+                    const number = event.target.innerHTML.replaceAll(" ", "");
+                    console.log(number);
+                    flexRef.postMessage(number, "https://flex.twilio.com/");
                 }
 
-                // bind sendMessage to click event from the dial number button
-                btnDial.addEventListener("click", sendMessage);
-                // similarly bind sendMessage to Enter keypress from the phone number
-                txtNumber.addEventListener("keyup", function (event) {
-                    if (event.keyCode === 13) {
-                        sendMessage(event);
-                    }
-                });
-
-                // bind receiveMessage to incoming postMessage events
-                // window.addEventListener("message", receiveMessage, false);
-
-                // render customer profile when a task is selected in Flex
-                // function receiveMessage(event) {
-                //     console.log("Received event data: ", event.data);
-                //     if (event.data.account_data) {
-                //         var profileContainer =
-                //             document.querySelector("#profile-container");
-                //         var profileName =
-                //             profileContainer.querySelector("#name");
-                //         var profileImg = profileContainer.querySelector("#img");
-                //         profileName.textContent =
-                //             event.data.account_data.first_name +
-                //             " " +
-                //             event.data.account_data.last_name;
-                //         profileImg.src =
-                //             crmBaseUrl + event.data.account_data.img_src;
-                //     }
-                // }
+                dial.addEventListener("click", sendMessage);
             };
         </script>
     </head>
 
     <body>
         <header>
-            <img class="logo" src="images/logo.svg" alt="Ducky CRM logo" />
             <div>Dummy CRM</div>
         </header>
         <main>
@@ -77,7 +43,7 @@
                     <div class="iframe-wrapper">
                         <iframe
                             id="flex"
-                            src="https://00c6-213-109-232-25.ngrok-free.app"
+                            src="https://flex.twilio.com/"
                             class="frame"
                         ></iframe>
                     </div>
@@ -87,29 +53,34 @@
                         <h2>CRM</h2>
                         <p>This panel can communicate with Flex</p>
                     </div>
-                    <div id="profile-container">
-                        <div class="profile">
-                            <img id="img" src="/images/unknown.svg" />
-                            <div class="header1">
-                                <div class="header2">
-                                    <span>Customer profile</span>
-                                </div>
-                            </div>
-                            <div class="profile-details">
-                                <div class="profile-name">
-                                    <span id="name">No Customer Selected</span>
-                                </div>
-                            </div>
+                    <div>
+                        <div>
+                            <p>
+                                Lorem ipsum, dolor sit amet consectetur
+                                adipisicing elit. Enim, quos. Officiis sunt quia
+                                alias ab impedit qui, culpa fugiat ipsam in
+                                illum eaque debitis repellat veniam facere
+                                praesentium vero velit rerum deserunt quibusdam
+                                molestiae cum.
+                                <a id="dial-number" href="tel:+380681876382"
+                                    >+38 068 187 63 82</a
+                                >
+                                Officiis, corrupti! Optio, in magni ducimus
+                                delectus asperiores dolore voluptates minus ut,
+                                eos voluptatem quas sequi, sint ipsa? Animi illo
+                                aut nam optio labore vel alias beatae ullam,
+                                eius minima saepe laboriosam quis sapiente
+                                voluptatibus nostrum, asperiores blanditiis
+                                aspernatur velit itaque sint consequuntur esse
+                                doloremque provident? Obcaecati asperiores cum
+                                numquam delectus molestias mollitia laborum quis
+                                tempore dolorum doloremque ducimus voluptatum,
+                                fuga, accusamus non? Eos asperiores ratione fuga
+                                quas commodi ducimus expedita, consectetur,
+                                similique, veniam totam dolores ab atque minus?
+                                Assumenda nam sint obcaecati soluta temporibus.
+                            </p>
                         </div>
-                    </div>
-                    <div class="dialer">
-                        <label for="phone-number">Phone number to dial</label>
-                        <input id="phone-number" type="text" />
-                        <input
-                            id="dial-number"
-                            type="button"
-                            value="Dial now"
-                        />
                     </div>
                 </div>
             </div>
